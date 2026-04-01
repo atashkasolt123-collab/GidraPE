@@ -118,11 +118,11 @@
                 </p>
                 
                 <div class="flex flex-wrap gap-3">
-                    <a href="http://www.youtube.com/@GidraPE" target="_blank" class="btn-primary px-6 py-3 rounded-xl font-medium text-sm flex items-center space-x-2 text-white">
+                    <a href="http://www.youtube.com/@GidraPE" target="_blank" rel="noopener noreferrer" class="btn-primary px-6 py-3 rounded-xl font-medium text-sm flex items-center space-x-2 text-white">
                         <i data-lucide="youtube" class="w-4 h-4"></i>
                         <span>YouTube канал</span>
                     </a>
-                    <a href="https://t.me/GidraPhoenix" target="_blank" class="btn-secondary px-6 py-3 rounded-xl font-medium text-sm flex items-center space-x-2 text-white">
+                    <a href="https://t.me/GidraPhoenix" target="_blank" rel="noopener noreferrer" class="btn-secondary px-6 py-3 rounded-xl font-medium text-sm flex items-center space-x-2 text-white">
                         <i data-lucide="send" class="w-4 h-4"></i>
                         <span>Telegram</span>
                     </a>
@@ -175,7 +175,7 @@
         <!-- Links Section -->
         <div class="grid md:grid-cols-3 gap-4">
             <!-- Telegram Chat -->
-            <a href="https://t.me/GidraPEChat" target="_blank" class="glass-card rounded-2xl p-6 hover-scale group cursor-pointer block">
+            <a href="https://t.me/GidraPEChat" target="_blank" rel="noopener noreferrer" class="glass-card rounded-2xl p-6 hover-scale group cursor-pointer block">
                 <div class="flex items-start justify-between mb-4">
                     <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center group-hover:bg-blue-500/30 transition">
                         <i data-lucide="messages-square" class="w-6 h-6 text-blue-400"></i>
@@ -188,7 +188,7 @@
             </a>
 
             <!-- YouTube Channel -->
-            <a href="http://www.youtube.com/@GidraPE" target="_blank" class="glass-card rounded-2xl p-6 hover-scale group cursor-pointer block">
+            <a href="http://www.youtube.com/@GidraPE" target="_blank" rel="noopener noreferrer" class="glass-card rounded-2xl p-6 hover-scale group cursor-pointer block">
                 <div class="flex items-start justify-between mb-4">
                     <div class="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center group-hover:bg-red-500/30 transition">
                         <i data-lucide="youtube" class="w-6 h-6 text-red-400"></i>
@@ -201,7 +201,7 @@
             </a>
 
             <!-- Telegram Channel -->
-            <a href="https://t.me/GidraPhoenix" target="_blank" class="glass-card rounded-2xl p-6 hover-scale group cursor-pointer block">
+            <a href="https://t.me/GidraPhoenix" target="_blank" rel="noopener noreferrer" class="glass-card rounded-2xl p-6 hover-scale group cursor-pointer block">
                 <div class="flex items-start justify-between mb-4">
                     <div class="w-12 h-12 bg-cyan-500/20 rounded-xl flex items-center justify-center group-hover:bg-cyan-500/30 transition">
                         <i data-lucide="send" class="w-6 h-6 text-cyan-400"></i>
@@ -242,7 +242,7 @@
                         Будь первым узнавать о новых видео, участвуй в обсуждениях и общайся с единомышленниками в нашем Telegram чате.
                     </p>
                 </div>
-                <a href="https://t.me/GidraPEChat" target="_blank" class="btn-primary px-8 py-3 rounded-xl font-medium text-sm flex items-center space-x-2 text-white whitespace-nowrap">
+                <a href="https://t.me/GidraPEChat" target="_blank" rel="noopener noreferrer" class="btn-primary px-8 py-3 rounded-xl font-medium text-sm flex items-center space-x-2 text-white whitespace-nowrap">
                     <i data-lucide="users" class="w-4 h-4"></i>
                     <span>Вступить в чат</span>
                 </a>
@@ -256,13 +256,13 @@
         <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-500">
             <p>© 2026 Gidra - Phoenix. Все права защищены.</p>
             <div class="flex items-center space-x-4">
-                <a href="http://www.youtube.com/@GidraPE" target="_blank" class="hover:text-red-400 transition">
+                <a href="http://www.youtube.com/@GidraPE" target="_blank" rel="noopener noreferrer" class="hover:text-red-400 transition" aria-label="YouTube канал">
                     <i data-lucide="youtube" class="w-5 h-5"></i>
                 </a>
-                <a href="https://t.me/GidraPhoenix" target="_blank" class="hover:text-blue-400 transition">
+                <a href="https://t.me/GidraPhoenix" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition" aria-label="Telegram канал">
                     <i data-lucide="send" class="w-5 h-5"></i>
                 </a>
-                <a href="https://t.me/GidraPEChat" target="_blank" class="hover:text-cyan-400 transition">
+                <a href="https://t.me/GidraPEChat" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-400 transition" aria-label="Telegram чат">
                     <i data-lucide="message-circle" class="w-5 h-5"></i>
                 </a>
             </div>
@@ -279,18 +279,31 @@
 
     <script>
         // Initialize Lucide icons
-        lucide.createIcons();
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof lucide !== 'undefined' && lucide.createIcons) {
+                lucide.createIcons();
+            }
+        });
 
         // Mobile menu toggle
         function toggleMobileMenu() {
             const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('hidden');
+            if (menu) {
+                menu.classList.toggle('hidden');
+            }
         }
 
         // Toast notification
         function showComingSoon() {
             const toast = document.getElementById('toast');
+            if (!toast) return;
             toast.classList.remove('translate-y-20', 'opacity-0');
+            
+            // Reset text in case it was changed by other toast calls
+            const span = toast.querySelector('span');
+            if (span && span.textContent !== 'Скоро будет доступно!') {
+                span.textContent = 'Скоро будет доступно!';
+            }
             
             setTimeout(() => {
                 toast.classList.add('translate-y-20', 'opacity-0');
@@ -300,31 +313,55 @@
         // Copy to clipboard function (for future use)
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(() => {
-                showToast('Скопировано!');
+                showToastMessage('Скопировано!');
+            }).catch(() => {
+                showToastMessage('Не удалось скопировать');
             });
         }
 
-        function showToast(message) {
+        function showToastMessage(message) {
             const toast = document.getElementById('toast');
-            toast.querySelector('span').textContent = message;
+            if (!toast) return;
+            const span = toast.querySelector('span');
+            if (span) span.textContent = message;
             toast.classList.remove('translate-y-20', 'opacity-0');
             
             setTimeout(() => {
                 toast.classList.add('translate-y-20', 'opacity-0');
+                // Restore original message after hiding
+                setTimeout(() => {
+                    if (span && span.textContent !== 'Скоро будет доступно!') {
+                        span.textContent = 'Скоро будет доступно!';
+                    }
+                }, 300);
             }, 3000);
         }
 
-        // Add smooth scroll behavior
+        // Add smooth scroll behavior for any anchor links (if present)
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
+                const href = this.getAttribute('href');
+                if (href === '#' || href === '#') return;
+                const target = document.querySelector(href);
                 if (target) {
+                    e.preventDefault();
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
+
+        // Fallback for lucide icons if they don't load immediately
+        if (typeof lucide === 'undefined') {
+            console.warn('Lucide not loaded, retrying...');
+            const checkLucide = setInterval(() => {
+                if (typeof lucide !== 'undefined' && lucide.createIcons) {
+                    lucide.createIcons();
+                    clearInterval(checkLucide);
+                }
+            }, 200);
+            setTimeout(() => clearInterval(checkLucide), 5000);
+        }
     </script>
-<script src="https://deepsite.hf.co/deepsite-badge.js"></script>
 </body>
 </html>
+
