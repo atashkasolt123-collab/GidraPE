@@ -2,366 +2,514 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gidra - Phoenix | Идеальный Ютубер</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>LittleHost — VDS хостинг для Minecraft PE/PC</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
+            background: linear-gradient(145deg, #0a0c14 0%, #0f121c 100%);
             font-family: 'Inter', sans-serif;
-            background-color: #0f0f0f;
-            background-image: 
-                radial-gradient(circle at 20% 50%, rgba(220, 38, 38, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(220, 38, 38, 0.1) 0%, transparent 50%);
+            color: #eef2ff;
+            line-height: 1.4;
         }
-        .glass-card {
-            background: rgba(30, 30, 30, 0.8);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
         }
-        .gradient-text {
-            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+
+        /* hero header */
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            gap: 2rem;
+            background: rgba(15, 20, 30, 0.55);
+            backdrop-filter: blur(10px);
+            border-radius: 2.5rem;
+            padding: 1.8rem 2.2rem;
+            border: 1px solid rgba(0, 255, 170, 0.3);
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.5);
+        }
+
+        .logo-area h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00FFAA, #00CC88);
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
         }
-        .hover-scale {
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        .logo-area p {
+            font-size: 0.9rem;
+            color: #b9c3e0;
+            margin-top: 6px;
         }
-        .hover-scale:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px -5px rgba(220, 38, 38, 0.3);
+
+        .stats-badge {
+            display: flex;
+            gap: 1.5rem;
+            background: rgba(0,0,0,0.45);
+            padding: 0.7rem 1.5rem;
+            border-radius: 60px;
+            backdrop-filter: blur(4px);
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat .number {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: #00FFAA;
+        }
+        .stat .label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* карточки */
+        .card {
+            background: rgba(18, 22, 35, 0.75);
+            backdrop-filter: blur(8px);
+            border-radius: 2rem;
+            padding: 1.8rem;
+            border: 1px solid rgba(0, 255, 170, 0.2);
+            transition: transform 0.2s, border-color 0.2s;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        .card:hover {
+            border-color: rgba(0, 255, 170, 0.6);
+            transform: translateY(-3px);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 4px solid #00FFAA;
+            padding-left: 1rem;
+        }
+        .card-title i {
+            color: #00FFAA;
+            font-size: 1.6rem;
+        }
+
+        .server-ip {
+            background: #0b0e16;
+            padding: 0.8rem 1.2rem;
+            border-radius: 1.2rem;
+            font-family: monospace;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 1rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .copy-btn {
+            background: #00FFAA;
+            border: none;
+            padding: 0.4rem 1rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            color: #0a0c14;
+        }
+        .copy-btn:hover {
+            background: #00cc88;
+            transform: scale(0.97);
+        }
+
+        .online-status {
+            display: flex;
+            gap: 2rem;
+            margin: 1.2rem 0;
+            flex-wrap: wrap;
+        }
+        .online-item {
+            background: rgba(0,0,0,0.4);
+            border-radius: 1.5rem;
+            padding: 0.4rem 1rem;
+            font-weight: 500;
+        }
+        .online-item span {
+            color: #00FFAA;
+            font-weight: 800;
+        }
+
+        /* тарифы VDS */
+        .tariff-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .tariff-card {
+            background: rgba(0, 20, 15, 0.6);
+            border-radius: 1.5rem;
+            padding: 1rem 1.2rem;
+            flex: 1;
+            min-width: 160px;
+            border: 1px solid rgba(0,255,170,0.3);
+            transition: 0.2s;
+        }
+        .tariff-card h4 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #00FFAA;
+        }
+        .tariff-card .price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 8px 0;
+        }
+        .tariff-card ul {
+            list-style: none;
+            font-size: 0.8rem;
+            margin-top: 8px;
+        }
+        .tariff-card li {
+            margin: 6px 0;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1.8rem 0 1rem;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.8rem 1.8rem;
+            border-radius: 2.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s;
+            font-size: 1rem;
         }
         .btn-primary {
-            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
-            transition: all 0.3s ease;
+            background: #00FFAA;
+            color: #0a0c14;
+            box-shadow: 0 4px 12px rgba(0,255,170,0.3);
         }
         .btn-primary:hover {
-            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-            box-shadow: 0 0 20px rgba(220, 38, 38, 0.5);
+            background: #55ffc2;
+            transform: translateY(-2px);
         }
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
+        .btn-outline {
+            border: 1px solid #00FFAA;
+            color: #00FFAA;
+            background: transparent;
         }
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(220, 38, 38, 0.5);
+        .btn-outline:hover {
+            background: rgba(0,255,170,0.15);
+            border-color: #55ffc2;
         }
-        .tag {
-            background: rgba(220, 38, 38, 0.2);
-            border: 1px solid rgba(220, 38, 38, 0.3);
+
+        /* навигация */
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: center;
         }
-        .stat-card {
-            background: rgba(40, 40, 40, 0.6);
+        .nav-item {
+            background: rgba(0,0,0,0.4);
+            padding: 0.6rem 1.5rem;
+            border-radius: 3rem;
+            font-weight: 600;
+            cursor: default;
+            backdrop-filter: blur(4px);
+            font-size: 0.9rem;
+        }
+        .nav-item i {
+            margin-right: 8px;
+            color: #00FFAA;
+        }
+
+        .social-section {
+            background: rgba(18, 22, 35, 0.7);
+            border-radius: 2rem;
+            padding: 1.8rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(0,255,170,0.3);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .social-text h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
+        }
+        .social-icon {
+            background: #0f111c;
+            padding: 0.8rem 1.5rem;
+            border-radius: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            transition: 0.2s;
+            border: 1px solid #2a2f42;
+        }
+        .social-icon i {
+            font-size: 1.4rem;
+        }
+        .social-icon:hover {
+            background: #00FFAA;
+            border-color: #00FFAA;
+            color: #0a0c14;
+            transform: scale(1.02);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 1.5rem;
+            font-size: 0.8rem;
+            color: #8e98b3;
+            border-top: 1px solid rgba(0,255,170,0.2);
+        }
+
+        @media (max-width: 850px) {
+            .container {
+                padding: 1rem;
+            }
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+            .two-columns {
+                grid-template-columns: 1fr !important;
+            }
+        }
+
+        .feature-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+        .feature-badge {
+            background: rgba(0, 255, 170, 0.12);
+            border-radius: 2rem;
+            padding: 0.4rem 1rem;
+            font-size: 0.85rem;
+            border: 1px solid rgba(0,255,170,0.3);
+        }
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
         }
     </style>
 </head>
-<body class="text-gray-100 min-h-screen">
-    <!-- Navigation -->
-    <nav class="sticky top-0 z-50 glass-card border-b border-red-900/20">
-        <div class="max-w-6xl mx-auto px-4 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 bg-gradient-to-br from-red-500 to-red-700 rounded-lg flex items-center justify-center shadow-lg shadow-red-500/30">
-                        <i data-lucide="flame" class="w-5 h-5 text-white"></i>
-                    </div>
-                    <div>
-                        <h1 class="font-bold text-lg text-white">Gidra - Phoenix</h1>
-                        <p class="text-xs text-gray-400">Идеальный ютубер</p>
-                    </div>
-                </div>
-                
-                <div class="hidden md:flex items-center space-x-1">
-                    <button onclick="showComingSoon()" class="px-4 py-2 rounded-lg text-sm text-gray-300 hover:text-white hover:bg-white/5 transition">Главная</button>
-                    <button onclick="showComingSoon()" class="px-4 py-2 rounded-lg text-sm text-gray-300 hover:text-white hover:bg-white/5 transition">Видео</button>
-                    <button onclick="showComingSoon()" class="px-4 py-2 rounded-lg text-sm text-gray-300 hover:text-white hover:bg-white/5 transition">О канале</button>
-                </div>
-
-                <button onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-lg hover:bg-white/10 transition">
-                    <i data-lucide="menu" class="w-5 h-5"></i>
-                </button>
-            </div>
+<body>
+<div class="container">
+    <!-- Hero блок -->
+    <div class="hero">
+        <div class="logo-area">
+            <h1><i class="fas fa-server" style="color:#00FFAA; margin-right: 8px;"></i>LittleHost</h1>
+            <p>⚡ VDS/VPS хостинг для Minecraft PE / PC • Надёжно и доступно</p>
         </div>
-        
-        <!-- Mobile Menu -->
-        <div id="mobileMenu" class="hidden md:hidden border-t border-white/10 bg-[#1a1a1a]">
-            <div class="px-4 py-3 space-y-2">
-                <button onclick="showComingSoon()" class="block w-full text-left px-4 py-2 rounded-lg text-gray-300 hover:bg-white/5">Главная</button>
-                <button onclick="showComingSoon()" class="block w-full text-left px-4 py-2 rounded-lg text-gray-300 hover:bg-white/5">Видео</button>
-                <button onclick="showComingSoon()" class="block w-full text-left px-4 py-2 rounded-lg text-gray-300 hover:bg-white/5">О канале</button>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="max-w-6xl mx-auto px-4 py-8 space-y-6">
-        
-        <!-- Hero Section -->
-        <div class="grid md:grid-cols-2 gap-6">
-            <!-- Left Column - Main Info -->
-            <div class="glass-card rounded-2xl p-6 md:p-8 space-y-6 hover-scale">
-                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full tag text-xs font-medium text-red-300">
-                    <span class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
-                    <span>YOUTUBE CREATOR</span>
-                </div>
-                
-                <h2 class="text-3xl md:text-4xl font-bold leading-tight">
-                    Подпишись на канал <br>
-                    <span class="gradient-text">Gidra - Phoenix</span>
-                </h2>
-                
-                <p class="text-gray-400 text-sm leading-relaxed">
-                    Лучший контент от идеального ютубера. Присоединяйся к сообществу, смотри видео, общайся в чате и будь в курсе всех обновлений.
-                </p>
-                
-                <div class="flex flex-wrap gap-3">
-                    <a href="http://www.youtube.com/@GidraPE" target="_blank" rel="noopener noreferrer" class="btn-primary px-6 py-3 rounded-xl font-medium text-sm flex items-center space-x-2 text-white">
-                        <i data-lucide="youtube" class="w-4 h-4"></i>
-                        <span>YouTube канал</span>
-                    </a>
-                    <a href="https://t.me/GidraPhoenix" target="_blank" rel="noopener noreferrer" class="btn-secondary px-6 py-3 rounded-xl font-medium text-sm flex items-center space-x-2 text-white">
-                        <i data-lucide="send" class="w-4 h-4"></i>
-                        <span>Telegram</span>
-                    </a>
-                </div>
-
-                <!-- Stats -->
-                <div class="grid grid-cols-2 gap-3 pt-4">
-                    <div class="stat-card rounded-xl p-4 border border-white/5">
-                        <p class="text-xs text-gray-500 mb-1">Подписчиков</p>
-                        <p class="text-xl font-bold text-white">100+</p>
-                    </div>
-                    <div class="stat-card rounded-xl p-4 border border-white/5">
-                        <p class="text-xs text-gray-500 mb-1">Видео</p>
-                        <p class="text-xl font-bold text-white">0</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right Column - Avatar/Visual -->
-            <div class="glass-card rounded-2xl p-6 md:p-8 flex flex-col items-center justify-center space-y-4 hover-scale relative overflow-hidden">
-                <div class="absolute inset-0 bg-gradient-to-br from-red-600/10 to-transparent"></div>
-                
-                <div class="relative w-32 h-32 md:w-40 md:h-40">
-                    <div class="absolute inset-0 bg-gradient-to-br from-red-500 to-red-700 rounded-3xl rotate-6 opacity-50 blur-lg"></div>
-                    <div class="relative w-full h-full bg-gradient-to-br from-gray-700 to-gray-900 rounded-3xl border-4 border-red-500/30 flex items-center justify-center overflow-hidden">
-                        <div class="w-full h-full bg-gradient-to-b from-red-400/20 via-transparent to-red-900/40"></div>
-                        <div class="absolute bottom-0 w-full h-1/2 bg-red-600/80"></div>
-                        <div class="absolute top-4 w-3/4 h-1/3 bg-orange-300/90 rounded-t-2xl"></div>
-                        <i data-lucide="flame" class="absolute w-16 h-16 text-red-500 drop-shadow-lg"></i>
-                    </div>
-                </div>
-                
-                <div class="flex flex-wrap justify-center gap-2 relative z-10">
-                    <span class="px-3 py-1.5 rounded-lg bg-red-500/20 text-red-300 text-xs font-medium border border-red-500/30 flex items-center space-x-1">
-                        <i data-lucide="gamepad-2" class="w-3 h-3"></i>
-                        <span>Гейминг</span>
-                    </span>
-                    <span class="px-3 py-1.5 rounded-lg bg-blue-500/20 text-blue-300 text-xs font-medium border border-blue-500/30 flex items-center space-x-1">
-                        <i data-lucide="message-circle" class="w-3 h-3"></i>
-                        <span>Общение</span>
-                    </span>
-                    <span class="px-3 py-1.5 rounded-lg bg-yellow-500/20 text-yellow-300 text-xs font-medium border border-yellow-500/30 flex items-center space-x-1">
-                        <i data-lucide="star" class="w-3 h-3"></i>
-                        <span>Топ контент</span>
-                    </span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Links Section -->
-        <div class="grid md:grid-cols-3 gap-4">
-            <!-- Telegram Chat -->
-            <a href="https://t.me/GidraPEChat" target="_blank" rel="noopener noreferrer" class="glass-card rounded-2xl p-6 hover-scale group cursor-pointer block">
-                <div class="flex items-start justify-between mb-4">
-                    <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center group-hover:bg-blue-500/30 transition">
-                        <i data-lucide="messages-square" class="w-6 h-6 text-blue-400"></i>
-                    </div>
-                    <i data-lucide="external-link" class="w-4 h-4 text-gray-500 group-hover:text-white transition"></i>
-                </div>
-                <h3 class="font-semibold text-white mb-1">Чат в Telegram</h3>
-                <p class="text-sm text-gray-400">@GidraPEChat</p>
-                <p class="text-xs text-gray-500 mt-2">Общайся с сообществом</p>
-            </a>
-
-            <!-- YouTube Channel -->
-            <a href="http://www.youtube.com/@GidraPE" target="_blank" rel="noopener noreferrer" class="glass-card rounded-2xl p-6 hover-scale group cursor-pointer block">
-                <div class="flex items-start justify-between mb-4">
-                    <div class="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center group-hover:bg-red-500/30 transition">
-                        <i data-lucide="youtube" class="w-6 h-6 text-red-400"></i>
-                    </div>
-                    <i data-lucide="external-link" class="w-4 h-4 text-gray-500 group-hover:text-white transition"></i>
-                </div>
-                <h3 class="font-semibold text-white mb-1">YouTube канал</h3>
-                <p class="text-sm text-gray-400">@GidraPE</p>
-                <p class="text-xs text-gray-500 mt-2">Смотри видео и подписывайся</p>
-            </a>
-
-            <!-- Telegram Channel -->
-            <a href="https://t.me/GidraPhoenix" target="_blank" rel="noopener noreferrer" class="glass-card rounded-2xl p-6 hover-scale group cursor-pointer block">
-                <div class="flex items-start justify-between mb-4">
-                    <div class="w-12 h-12 bg-cyan-500/20 rounded-xl flex items-center justify-center group-hover:bg-cyan-500/30 transition">
-                        <i data-lucide="send" class="w-6 h-6 text-cyan-400"></i>
-                    </div>
-                    <i data-lucide="external-link" class="w-4 h-4 text-gray-500 group-hover:text-white transition"></i>
-                </div>
-                <h3 class="font-semibold text-white mb-1">Telegram канал</h3>
-                <p class="text-sm text-gray-400">@GidraPhoenix</p>
-                <p class="text-xs text-gray-500 mt-2">Новости и анонсы</p>
-            </a>
-        </div>
-
-        <!-- Content Categories -->
-        <div class="glass-card rounded-2xl p-6 md:p-8">
-            <h3 class="font-semibold text-white mb-4 flex items-center space-x-2">
-                <i data-lucide="sparkles" class="w-5 h-5 text-red-400"></i>
-                <span>Популярные темы</span>
-            </h3>
-            <div class="flex flex-wrap gap-2">
-                <span class="px-4 py-2 rounded-lg bg-white/5 text-gray-300 text-sm border border-white/10 hover:border-red-500/50 hover:text-white transition cursor-default">Minecraft</span>
-                <span class="px-4 py-2 rounded-lg bg-white/5 text-gray-300 text-sm border border-white/10 hover:border-red-500/50 hover:text-white transition cursor-default">PE Edition</span>
-                <span class="px-4 py-2 rounded-lg bg-white/5 text-gray-300 text-sm border border-white/10 hover:border-red-500/50 hover:text-white transition cursor-default">Обзоры</span>
-                <span class="px-4 py-2 rounded-lg bg-white/5 text-gray-300 text-sm border border-white/10 hover:border-red-500/50 hover:text-white transition cursor-default">Туториалы</span>
-                <span class="px-4 py-2 rounded-lg bg-white/5 text-gray-300 text-sm border border-white/10 hover:border-red-500/50 hover:text-white transition cursor-default">PvP</span>
-                <span class="px-4 py-2 rounded-lg bg-white/5 text-gray-300 text-sm border border-white/10 hover:border-red-500/50 hover:text-white transition cursor-default">Выживание</span>
-                <span class="px-4 py-2 rounded-lg bg-white/5 text-gray-300 text-sm border border-white/10 hover:border-red-500/50 hover:text-white transition cursor-default">Приключения</span>
-                <span class="px-4 py-2 rounded-lg bg-white/5 text-gray-300 text-sm border border-white/10 hover:border-red-500/50 hover:text-white transition cursor-default">Блоги</span>
-            </div>
-        </div>
-
-        <!-- Community Section -->
-        <div class="glass-card rounded-2xl p-6 md:p-8 relative overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-r from-red-600/10 via-transparent to-blue-600/10"></div>
-            <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
-                <div class="space-y-2 text-center md:text-left">
-                    <h3 class="text-xl font-bold text-white">Присоединяйся к сообществу</h3>
-                    <p class="text-gray-400 text-sm max-w-md">
-                        Будь первым узнавать о новых видео, участвуй в обсуждениях и общайся с единомышленниками в нашем Telegram чате.
-                    </p>
-                </div>
-                <a href="https://t.me/GidraPEChat" target="_blank" rel="noopener noreferrer" class="btn-primary px-8 py-3 rounded-xl font-medium text-sm flex items-center space-x-2 text-white whitespace-nowrap">
-                    <i data-lucide="users" class="w-4 h-4"></i>
-                    <span>Вступить в чат</span>
-                </a>
-            </div>
-        </div>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="max-w-6xl mx-auto px-4 py-6 mt-8 border-t border-white/10">
-        <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-500">
-            <p>© 2026 Gidra - Phoenix. Все права защищены.</p>
-            <div class="flex items-center space-x-4">
-                <a href="http://www.youtube.com/@GidraPE" target="_blank" rel="noopener noreferrer" class="hover:text-red-400 transition" aria-label="YouTube канал">
-                    <i data-lucide="youtube" class="w-5 h-5"></i>
-                </a>
-                <a href="https://t.me/GidraPhoenix" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition" aria-label="Telegram канал">
-                    <i data-lucide="send" class="w-5 h-5"></i>
-                </a>
-                <a href="https://t.me/GidraPEChat" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-400 transition" aria-label="Telegram чат">
-                    <i data-lucide="message-circle" class="w-5 h-5"></i>
-                </a>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Toast Notification -->
-    <div id="toast" class="fixed bottom-4 right-4 transform translate-y-20 opacity-0 transition-all duration-300 z-50">
-        <div class="glass-card px-6 py-4 rounded-xl border border-red-500/30 shadow-lg shadow-red-500/20 flex items-center space-x-3">
-            <i data-lucide="info" class="w-5 h-5 text-red-400"></i>
-            <span class="text-sm text-white">Скоро будет доступно!</span>
+        <div class="stats-badge">
+            <div class="stat"><div class="number">99.9%</div><div class="label">АПТАЙМ</div></div>
+            <div class="stat"><div class="number">5+</div><div class="label">ЛОКАЦИЙ</div></div>
+            <div class="stat"><div class="number">24/7</div><div class="label">ПОДДЕРЖКА</div></div>
         </div>
     </div>
 
-    <script>
-        // Initialize Lucide icons
-        document.addEventListener('DOMContentLoaded', () => {
-            if (typeof lucide !== 'undefined' && lucide.createIcons) {
-                lucide.createIcons();
-            }
-        });
+    <!-- Навигация -->
+    <div class="nav-links">
+        <div class="nav-item"><i class="fas fa-home"></i> Главная</div>
+        <div class="nav-item"><i class="fas fa-cubes"></i> VDS Тарифы</div>
+        <div class="nav-item"><i class="fab fa-minecraft"></i> Для Minecraft</div>
+        <div class="nav-item"><i class="fas fa-shield-alt"></i> Защита</div>
+    </div>
 
-        // Mobile menu toggle
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobileMenu');
-            if (menu) {
-                menu.classList.toggle('hidden');
-            }
-        }
+    <!-- Основная сетка: тарифы + Minecraft блок -->
+    <div class="two-columns">
+        <!-- Левый блок: VDS тарифы -->
+        <div class="card">
+            <div class="card-title">
+                <i class="fas fa-microchip"></i>
+                <span>Тарифы VDS / VPS</span>
+            </div>
+            <p>Выделенные ресурсы, полный root-доступ, поддержка любых сборок Minecraft (Bedrock/Java).</p>
+            <div class="tariff-grid">
+                <div class="tariff-card">
+                    <h4>Start</h4>
+                    <div class="price">590 ₽/мес</div>
+                    <ul>
+                        <li><i class="fas fa-microchip"></i> 2 vCPU</li>
+                        <li><i class="fas fa-memory"></i> 4 GB RAM</li>
+                        <li><i class="fas fa-hdd"></i> 50 GB NVMe</li>
+                        <li><i class="fas fa-tachometer-alt"></i> 100 Мбит/с</li>
+                    </ul>
+                </div>
+                <div class="tariff-card">
+                    <h4>Pro</h4>
+                    <div class="price">1190 ₽/мес</div>
+                    <ul>
+                        <li><i class="fas fa-microchip"></i> 4 vCPU</li>
+                        <li><i class="fas fa-memory"></i> 8 GB RAM</li>
+                        <li><i class="fas fa-hdd"></i> 100 GB NVMe</li>
+                        <li><i class="fas fa-tachometer-alt"></i> 200 Мбит/с</li>
+                    </ul>
+                </div>
+                <div class="tariff-card">
+                    <h4>Ultra</h4>
+                    <div class="price">2190 ₽/мес</div>
+                    <ul>
+                        <li><i class="fas fa-microchip"></i> 8 vCPU</li>
+                        <li><i class="fas fa-memory"></i> 16 GB RAM</li>
+                        <li><i class="fas fa-hdd"></i> 250 GB NVMe</li>
+                        <li><i class="fas fa-tachometer-alt"></i> 500 Мбит/с</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="btn-group">
+                <a href="https://t.me/TheLittleHost" target="_blank" class="btn btn-primary"><i class="fab fa-telegram"></i> Подробнее в Telegram</a>
+                <a href="https://t.me/TheLittleHost" target="_blank" class="btn btn-outline"><i class="fas fa-question-circle"></i> Консультация</a>
+            </div>
+        </div>
 
-        // Toast notification
-        function showComingSoon() {
-            const toast = document.getElementById('toast');
-            if (!toast) return;
-            toast.classList.remove('translate-y-20', 'opacity-0');
-            
-            // Reset text in case it was changed by other toast calls
-            const span = toast.querySelector('span');
-            if (span && span.textContent !== 'Скоро будет доступно!') {
-                span.textContent = 'Скоро будет доступно!';
-            }
-            
-            setTimeout(() => {
-                toast.classList.add('translate-y-20', 'opacity-0');
-            }, 3000);
-        }
+        <!-- Правый блок: Minecraft PE/PC -->
+        <div class="card">
+            <div class="card-title">
+                <i class="fab fa-minecraft"></i>
+                <span>Minecraft PE / PC хостинг</span>
+            </div>
+            <p>Готовые решения для твоего сервера. Поддержка ядер: Purpur, Paper, Spigot, Nukkit (PE) и других.</p>
+            <div class="server-ip">
+                <span><i class="fas fa-gamepad"></i> Тестовый IP:</span>
+                <strong>mc.littlehost.demo</strong>
+                <button class="copy-btn" id="copyDemoIp"><i class="far fa-copy"></i> Копировать</button>
+            </div>
+            <div class="online-status">
+                <div class="online-item"><i class="fas fa-users"></i> Онлайн демо: <span>42</span> игрока</div>
+                <div class="online-item"><i class="fab fa-java"></i> Версии: <span>1.20.x — 1.21.4 / Bedrock 1.21</span></div>
+                <div class="online-item"><i class="fas fa-cloud-upload-alt"></i> Мгновенный деплой</div>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-badge"><i class="fas fa-tachometer-alt"></i> Автоустановка модов</div>
+                <div class="feature-badge"><i class="fas fa-database"></i> Бесплатные бэкапы</div>
+                <div class="feature-badge"><i class="fas fa-shield-virus"></i> DDoS защита</div>
+            </div>
+            <div class="btn-group" style="margin-top: 1rem;">
+                <a href="https://t.me/TheLittleHost" target="_blank" class="btn btn-primary"><i class="fab fa-telegram"></i> Запустить Minecraft сервер</a>
+                <a href="https://t.me/TheLittleHost" target="_blank" class="btn btn-outline"><i class="fas fa-crown"></i> Премиум поддержка</a>
+            </div>
+        </div>
+    </div>
 
-        // Copy to clipboard function (for future use)
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                showToastMessage('Скопировано!');
-            }).catch(() => {
-                showToastMessage('Не удалось скопировать');
-            });
-        }
+    <!-- Преимущества хостинга -->
+    <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 2rem;">
+        <div class="card" style="flex:1;">
+            <div class="card-title" style="font-size:1.2rem;"><i class="fas fa-check-circle"></i> Почему LittleHost?</div>
+            <ul style="list-style: none; margin-top: 10px;">
+                <li><i class="fas fa-check" style="color:#00FFAA;"></i> Высокая производительность на NVMe дисках</li>
+                <li><i class="fas fa-check" style="color:#00FFAA;"></i> Автоматическая установка Minecraft PE (Nukkit, PowerNukkit)</li>
+                <li><i class="fas fa-check" style="color:#00FFAA;"></i> Выделенные ядра без шаренга</li>
+                <li><i class="fas fa-check" style="color:#00FFAA;"></i> Бесплатный выделенный IP-адрес</li>
+                <li><i class="fas fa-check" style="color:#00FFAA;"></i> Регулярные бэкапы и защита от DDoS</li>
+            </ul>
+        </div>
+        <div class="card" style="flex:1;">
+            <div class="card-title" style="font-size:1.2rem;"><i class="fas fa-headset"></i> Техподдержка 24/7</div>
+            <p>Круглосуточная помощь в Telegram: настройка плагинов, модов, оптимизация сервера под Minecraft PE и Java Edition.</p>
+            <div style="background: #1f2538; border-radius: 1.2rem; padding: 0.8rem 1.2rem; margin-top: 1rem;">
+                <span><i class="fab fa-telegram"></i> Официальный канал: <strong>@TheLittleHost</strong></span>
+                <div style="margin-top: 6px;"><i class="fas fa-comment"></i> Чат временно отсутствует — все вопросы через канал</div>
+            </div>
+        </div>
+    </div>
 
-        function showToastMessage(message) {
-            const toast = document.getElementById('toast');
-            if (!toast) return;
-            const span = toast.querySelector('span');
-            if (span) span.textContent = message;
-            toast.classList.remove('translate-y-20', 'opacity-0');
-            
-            setTimeout(() => {
-                toast.classList.add('translate-y-20', 'opacity-0');
-                // Restore original message after hiding
+    <!-- Поддерживаемые версии Minecraft -->
+    <div class="card" style="margin-bottom: 2rem;">
+        <div class="card-title"><i class="fas fa-code-branch"></i> Поддерживаемые версии Minecraft</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: space-between;">
+            <div><i class="fab fa-java"></i> <strong>Java Edition:</strong> 1.8.x — 1.21.4 (Paper, Purpur, Forge, Fabric)</div>
+            <div><i class="fas fa-mobile-alt"></i> <strong>Bedrock / PE:</strong> 1.20.x — 1.21.2 (Nukkit, PowerNukkit, PocketMine-MP)</div>
+            <div><i class="fas fa-sync-alt"></i> Легкая миграция и бэкапы в один клик</div>
+        </div>
+    </div>
+
+    <!-- Блок Telegram канала -->
+    <div class="social-section">
+        <div class="social-text">
+            <h3><i class="fab fa-telegram"></i> Telegram канал LittleHost</h3>
+            <p>Актуальные новости хостинга, скидки, гайды по Minecraft серверам. Подписывайся!</p>
+            <div style="margin-top: 8px; font-size:0.85rem;">🎁 Еженедельные розыгрыши бесплатных VDS на месяц</div>
+        </div>
+        <div class="social-links">
+            <a href="https://t.me/TheLittleHost" target="_blank" class="social-icon"><i class="fab fa-telegram"></i> Telegram канал</a>
+            <a href="https://t.me/TheLittleHost" target="_blank" class="social-icon"><i class="fas fa-envelope"></i> Поддержка</a>
+        </div>
+    </div>
+
+    <!-- Футер -->
+    <footer>
+        <p>© 2025 LittleHost — VDS хостинг для Minecraft PE/PC. Все права защищены.</p>
+        <p style="margin-top: 8px;">
+            <a href="https://t.me/TheLittleHost" target="_blank" style="color:#00FFAA; text-decoration:none;">Telegram канал @TheLittleHost</a> &nbsp;|&nbsp;
+            <span>VDS / VPS для Minecraft Java и Bedrock</span>
+        </p>
+        <p><i class="fas fa-heart" style="color:#00FFAA;"></i> Надёжный хостинг для твоего проекта</p>
+    </footer>
+</div>
+
+<script>
+    // Копирование тестового IP
+    const copyBtn = document.getElementById('copyDemoIp');
+    if(copyBtn) {
+        copyBtn.addEventListener('click', () => {
+            const ipText = "mc.littlehost.demo";
+            navigator.clipboard.writeText(ipText).then(() => {
+                const originalText = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> Скопировано!';
                 setTimeout(() => {
-                    if (span && span.textContent !== 'Скоро будет доступно!') {
-                        span.textContent = 'Скоро будет доступно!';
-                    }
-                }, 300);
-            }, 3000);
-        }
-
-        // Add smooth scroll behavior for any anchor links (if present)
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                if (href === '#' || href === '#') return;
-                const target = document.querySelector(href);
-                if (target) {
-                    e.preventDefault();
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
+                    copyBtn.innerHTML = originalText;
+                }, 2000);
+            }).catch(() => {
+                alert('IP: mc.littlehost.demo');
             });
         });
-
-        // Fallback for lucide icons if they don't load immediately
-        if (typeof lucide === 'undefined') {
-            console.warn('Lucide not loaded, retrying...');
-            const checkLucide = setInterval(() => {
-                if (typeof lucide !== 'undefined' && lucide.createIcons) {
-                    lucide.createIcons();
-                    clearInterval(checkLucide);
-                }
-            }, 200);
-            setTimeout(() => clearInterval(checkLucide), 5000);
-        }
-    </script>
+    }
+</script>
 </body>
 </html>
 
